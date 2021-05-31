@@ -6,9 +6,7 @@
 
 from googleapiclient.discovery import build
 import json
-import pandas as pd
 from datetime import date, timedelta,datetime
-import numpy as np
 import time
 
 
