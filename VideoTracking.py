@@ -64,6 +64,7 @@ US=list(US)
 
 while True:
     day=date.today()
+    '''
     if(date.today().weekday()==0):#adiciona possiveis novos videos sobre vacinas toda segunda
         lastupdate = datetime.utcnow()-timedelta(days=7)#ultimo update foi há uma semana
         lastupdate=lastupdate.isoformat("T") + "Z"
@@ -157,7 +158,7 @@ while True:
                         write_document_to_file(newvid,file)
                 except:
                     pass
-        print(newvids,' new videos found')
+        print(newvids,' new videos found')'''
 
 
     # In[ ]:
