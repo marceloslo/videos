@@ -247,7 +247,7 @@ while True:
                         rm['RemovalDate']=day.strftime("%d/%m/%y")#adicione a data aos videos removidos
                         for t in videosJ:
                             if t['video']==k:
-                                rm['Channel']=videosJ['channel']
+                                rm['Channel']=t['channel']
                                 break
                         with open('removedVideos.json','a') as file2:#salvando o video removido
                             write_document_to_file(rm,file2)
