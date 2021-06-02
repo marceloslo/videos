@@ -172,7 +172,7 @@ while True:
             queriesBR.append(query)
             count+=1
         queriesOther=[]
-        for k in Others[:round(len(Others)/2)]:
+        for k in Others[round(len(Others)/2):]:
             print('Buscando novo video país indefinido ',count+1,' de', round(len(Others)/2))
             request = youtube.search().list(q='vacina',part=['id','snippet'],channelId=k,publishedAfter=lastupdate)
             query=request.execute()
