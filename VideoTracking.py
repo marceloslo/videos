@@ -1,16 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 from googleapiclient.discovery import build
 import json
+import pandas as pd
 from datetime import date, timedelta,datetime
+import numpy as np
 import time
 
 
-# In[ ]:
+# In[2]:
 
 
 def write_document_to_file(document, file):
@@ -19,7 +21,7 @@ def write_document_to_file(document, file):
     file.flush()
 
 
-# In[ ]:
+# In[3]:
 
 
 api_key = 'AIzaSyBvMnwW7NClOkJici-WJAfVFuPusFqlRxw'
@@ -28,7 +30,7 @@ api_key2 = 'AIzaSyBYqe5QINxeNg0tf5BEzh4ngzwBiDloDlI'
 youtube2 = build('youtube', 'v3', developerKey=api_key2)
 
 
-# In[ ]:
+# In[4]:
 
 
 part=["id","snippet","contentDetails","statistics","status"]
@@ -44,27 +46,42 @@ with open('videos.json') as json_file:
     videosJ=[]
     for line in json_file:
         videosJ.append(json.loads(line))
+        
+with open('channels_metadata.json') as json_file:
+    channels=[]
+    for line in json_file:
+        channels.append(json.loads(line))
 
 
-# In[ ]:
+# In[13]:
 
 
 US=set()
 BR=set()
-for i in videosJ:
-    if i['country']=='BR':
-        BR.add(i['channel'])
-    else:
-        US.add(i['channel'])
+Other=set()
+for i in channels:
+    try:
+        i['id']
+        try:
+            if i['country']=='BR':
+                BR.add(i['id'])
+            elif i['country']=='US':
+                US.add(i['id'])
+            else:
+                Other.add(i['id'])
+        except:
+            Other.add(i['id'])
+    except:
+        pass
 BR=list(BR)
 US=list(US)
+Other=list(Other)
 
 
 # In[ ]:
 
 while True:
     day=date.today()
-    '''
     if(date.today().weekday()==0):#adiciona possiveis novos videos sobre vacinas toda segunda
         lastupdate = datetime.utcnow()-timedelta(days=7)#ultimo update foi há uma semana
         lastupdate=lastupdate.isoformat("T") + "Z"
@@ -83,6 +100,16 @@ while True:
             request = youtube.search().list(q='vacina',part=['id','snippet'],channelId=j,publishedAfter=lastupdate)
             query=request.execute()
             queriesBR.append(query)
+            count+=1
+        queriesOther=[]
+        for k in Others[:round(len(Others)/2)]:
+            print('Buscando novo video país indefinido ',count+1,' de', round(len(Others)/2))
+            request = youtube.search().list(q='vacina',part=['id','snippet'],channelId=k,publishedAfter=lastupdate)
+            query=request.execute()
+            queriesOther.append(query)
+            request = youtube.search().list(q='vaccine',part=['id','snippet'],channelId=k,publishedAfter=lastupdate)
+            query=request.execute()
+            queriesOther.append(query)
             count+=1
         newvids=0
         for j in queries: #adiciona os novos videos aos videos a serem monitorados
@@ -105,6 +132,19 @@ while True:
                     newvid['video']=i['id']['videoId']
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='BR'
+                    videosJ.append(newvid)
+                    newvids+=1
+                    with open('videos.json','a') as file:#salvando a query
+                        write_document_to_file(newvid,file)
+                except:
+                    pass
+        for j in queriesOther: #adiciona os novos videos aos videos a serem monitorados
+            for i in j['items']:
+                try:
+                    newvid={}
+                    newvid['video']=i['id']['videoId']
+                    newvid['channel']=i['snippet']['channelId']
+                    newvid['country']='Other'
                     videosJ.append(newvid)
                     newvids+=1
                     with open('videos.json','a') as file:#salvando a query
@@ -131,6 +171,16 @@ while True:
             query=request.execute()
             queriesBR.append(query)
             count+=1
+        queriesOther=[]
+        for k in Others[:round(len(Others)/2)]:
+            print('Buscando novo video país indefinido ',count+1,' de', round(len(Others)/2))
+            request = youtube.search().list(q='vacina',part=['id','snippet'],channelId=k,publishedAfter=lastupdate)
+            query=request.execute()
+            queriesOther.append(query)
+            request = youtube.search().list(q='vaccine',part=['id','snippet'],channelId=k,publishedAfter=lastupdate)
+            query=request.execute()
+            queriesOther.append(query)
+            count+=1
         newvids=0
         for j in queries: #adiciona os novos videos aos videos a serem monitorados
             for i in j['items']:
@@ -158,7 +208,20 @@ while True:
                         write_document_to_file(newvid,file)
                 except:
                     pass
-        print(newvids,' new videos found')'''
+        for j in queriesOther: #adiciona os novos videos aos videos a serem monitorados
+            for i in j['items']:
+                try:
+                    newvid={}
+                    newvid['video']=i['id']['videoId']
+                    newvid['channel']=i['snippet']['channelId']
+                    newvid['country']='Other'
+                    videosJ.append(newvid)
+                    newvids+=1
+                    with open('videos.json','a') as file:#salvando a query
+                        write_document_to_file(newvid,file)
+                except:
+                    pass
+        print(newvids,' new videos found')
 
 
     # In[ ]:
@@ -184,7 +247,7 @@ while True:
                         rm['RemovalDate']=day.strftime("%d/%m/%y")#adicione a data aos videos removidos
                         for t in videosJ:
                             if t['video']==k:
-                                rm['Channel']=t['channel']
+                                rm['Channel']=videosJ['channel']
                                 break
                         with open('removedVideos.json','a') as file2:#salvando o video removido
                             write_document_to_file(rm,file2)
@@ -198,6 +261,8 @@ while True:
                 with open('videosData.json','a') as file:#salvando a query
                     write_document_to_file(dic,file)
     time.sleep(86400)
+
+# In[ ]:
 
 
 
