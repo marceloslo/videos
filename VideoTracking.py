@@ -227,7 +227,7 @@ while True:
 
     # In[14]:
 
-    print('Buscando ',len(videosJ),' videos)
+    print('Buscando ',len(videosJ),' videos')
     for l in range(len(videosJ)):
         checked=False     
         k=videosJ[l]['video']
