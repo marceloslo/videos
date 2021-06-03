@@ -88,23 +88,23 @@ while True:
         lastupdate=lastupdate.isoformat("T") + "Z"
         queries=[]
         count=0
+        print('Buscando novos videos US')
         for i in US[0:round(len(US)/2)]:#Busca videos para os estados unidos
-            print('Buscando novo video US ',count+1,' de', round(len(US)/2))
             request = youtube.search().list(q='vaccine',part=['id','snippet'],channelId=i,publishedAfter=lastupdate)
             query=request.execute()
             queries.append(query)
             count+=1
         count=0
         queriesBR=[]
+        print('Buscando novos videos BR')
         for j in BR[:round(len(BR)/2)]:#Busca videos para o brasil
-            print('Buscando novo video BR ',count+1,' de', round(len(BR)/2))
             request = youtube.search().list(q='vacina',part=['id','snippet'],channelId=j,publishedAfter=lastupdate)
             query=request.execute()
             queriesBR.append(query)
             count+=1
         queriesOther=[]
+        print('Buscando novos videos Outros')
         for k in Others[:round(len(Others)/2)]:
-            print('Buscando novo video país indefinido ',count+1,' de', round(len(Others)/2))
             request = youtube.search().list(q='vacina',part=['id','snippet'],channelId=k,publishedAfter=lastupdate)
             query=request.execute()
             queriesOther.append(query)
@@ -158,23 +158,23 @@ while True:
         lastupdate=lastupdate.isoformat("T") + "Z"
         queries=[]
         count=0
+        print('Buscando novos videos US')
         for i in US[round(len(US)/2):]:#Busca videos para os estados unidos
-            print('Buscando novo video US ',count+1,' de', round(len(US)/2))
             request = youtube.search().list(q='vaccine',part=['id','snippet'],channelId=i,publishedAfter=lastupdate)
             query=request.execute()
             queries.append(query)
             count+=1
         queriesBR=[]
         count=0
+        print('Buscando novos videos BR')
         for j in BR[round(len(BR)/2):]:#Busca videos para o brasil
-            print('Buscando novo video BR ',count+1,' de', round(len(BR)/2))
             request = youtube.search().list(q='vacina',part=['id','snippet'],channelId=j,publishedAfter=lastupdate)
             query=request.execute()
             queriesBR.append(query)
             count+=1
         queriesOther=[]
+        print('Buscando novos videos Outros')
         for k in Others[round(len(Others)/2):]:
-            print('Buscando novo video país indefinido ',count+1,' de', round(len(Others)/2))
             request = youtube.search().list(q='vacina',part=['id','snippet'],channelId=k,publishedAfter=lastupdate)
             query=request.execute()
             queriesOther.append(query)
@@ -227,9 +227,8 @@ while True:
 
     # In[14]:
 
-
+    print('Buscando ',len(videosJ),' videos)
     for l in range(len(videosJ)):
-        print('Video ',l+1,' de ',len(videosJ))
         checked=False     
         k=videosJ[l]['video']
         for j in range(len(videosData)-1,-1,-1):
@@ -269,4 +268,5 @@ while True:
                     dic['Data']=Vquery
                     with open('videosData.json','a') as file:#salvando a query
                         write_document_to_file(dic,file)
+    print('done ',day)   
     time.sleep(86400)
