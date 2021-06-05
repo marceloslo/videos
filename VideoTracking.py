@@ -117,6 +117,7 @@ while True:
             for i in j['items']:
                 try:
                     newvid={}
+                    newvid['date']=day.strftime("%d/%m/%y")
                     newvid['video']=i['id']['videoId']
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='US'
@@ -130,6 +131,7 @@ while True:
             for i in j['items']:
                 try:
                     newvid={}
+                    newvid['date']=day.strftime("%d/%m/%y")
                     newvid['video']=i['id']['videoId']
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='BR'
@@ -143,6 +145,7 @@ while True:
             for i in j['items']:
                 try:
                     newvid={}
+                    newvid['date']=day.strftime("%d/%m/%y")
                     newvid['video']=i['id']['videoId']
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='Other'
@@ -187,6 +190,7 @@ while True:
             for i in j['items']:
                 try:
                     newvid={}
+                    newvid['date']=day.strftime("%d/%m/%y")
                     newvid['video']=i['id']['videoId']
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='US'
@@ -200,6 +204,7 @@ while True:
             for i in j['items']:
                 try:
                     newvid={}
+                    newvid['date']=day.strftime("%d/%m/%y")
                     newvid['video']=i['id']['videoId']
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='BR'
@@ -213,6 +218,7 @@ while True:
             for i in j['items']:
                 try:
                     newvid={}
+                    newvid['date']=day.strftime("%d/%m/%y")
                     newvid['video']=i['id']['videoId']
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='Other'
