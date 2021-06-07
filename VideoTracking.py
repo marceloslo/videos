@@ -104,7 +104,7 @@ while True:
             count+=1
         queriesOther=[]
         print('Buscando novos videos Outros')
-        for k in Others[:round(len(Others)/2)]:
+        for k in Other[:round(len(Other)/2)]:
             request = youtube.search().list(q='vacina',part=['id','snippet'],channelId=k,publishedAfter=lastupdate)
             query=request.execute()
             queriesOther.append(query)
@@ -177,7 +177,7 @@ while True:
             count+=1
         queriesOther=[]
         print('Buscando novos videos Outros')
-        for k in Others[round(len(Others)/2):]:
+        for k in Other[round(len(Other)/2):]:
             request = youtube.search().list(q='vacina',part=['id','snippet'],channelId=k,publishedAfter=lastupdate)
             query=request.execute()
             queriesOther.append(query)
