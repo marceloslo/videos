@@ -32,7 +32,8 @@ api_key3 = 'AIzaSyBD-Epo0MEZmxJu-ZKhDSwWSBmhNSyPjYU'
 youtube3 = build('youtube', 'v3', developerKey=api_key3)
 api_key4 = 'AIzaSyBnHb4QwVnEvg4LHwWnY5ihlaxARZzxmNc'
 youtube4 = build('youtube', 'v3', developerKey=api_key4)
-
+api_key5 = 'AIzaSyAbZWYK9EvoiWiqLnx5Ie5fKMlZsfKhMc8'
+youtube5 = build('youtube', 'v3', developerKey=api_key5)
 covid_keywords = [
     "covid",
     "covid-19",
@@ -337,11 +338,14 @@ while True:
             else:
                 break
         if not checked:
-            if l <9999:
+            if l <7000:
                 Vreq=youtube2.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
-            elif l<19998:
+            elif l<14000:
                 Vreq=youtube3.videos().list(part=part,id=k)
+                Vquery=Vreq.execute()
+            elif l <21000:
+                Vreq=youtube5.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
             else:
                 Vreq=youtube4.videos().list(part=part,id=k)
