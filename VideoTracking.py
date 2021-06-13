@@ -85,9 +85,7 @@ covid_keywords = [
 ]
 # In[10]:
 
-def check_vaccine(vidId,keywords):
-    NVreq=youtube.videos().list(part=['snippet'],id=i['id']['videoId'])
-    NVquery=NVreq.execute()
+def check_vaccine(vidId,keywords,NVquery):
     title=NVquery['items'][0]['snippet']['title'].lower()
     description=NVquery['items'][0]['snippet']['description'].lower()
     present_keywords=[]
@@ -180,8 +178,10 @@ while True:
         for j in queries: #adiciona os novos videos aos videos a serem monitorados
             for i in j['items']:
                 try:
+                    NVreq=youtube2.videos().list(part=part,id=i['id']['videoId'])
+                    NVquery=NVreq.execute()
                     newvid={}
-                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords)
+                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords,NVquery)
                     if len(newvid['keywords']) > 0:
                         newvid['vaccine']=True
                     else:
@@ -191,6 +191,7 @@ while True:
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='US'
                     videosJ.append(newvid)
+                    newvid['data']=NVquery
                     newvids+=1
                     with open('videos.json','a') as file:#salvando a query
                         write_document_to_file(newvid,file)
@@ -199,8 +200,10 @@ while True:
         for j in queriesBR: #adiciona os novos videos aos videos a serem monitorados
             for i in j['items']:
                 try:
+                    NVreq=youtube2.videos().list(part=part,id=i['id']['videoId'])
+                    NVquery=NVreq.execute()
                     newvid={}
-                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords)
+                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords,NVquery)
                     if len(newvid['keywords']) > 0:
                         newvid['vaccine']=True
                     else:
@@ -210,6 +213,7 @@ while True:
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='BR'
                     videosJ.append(newvid)
+                    newvid['data']=NVquery
                     newvids+=1
                     with open('videos.json','a') as file:#salvando a query
                         write_document_to_file(newvid,file)
@@ -218,8 +222,10 @@ while True:
         for j in queriesOther: #adiciona os novos videos aos videos a serem monitorados
             for i in j['items']:
                 try:
+                    NVreq=youtube2.videos().list(part=part,id=i['id']['videoId'])
+                    NVquery=NVreq.execute()
                     newvid={}
-                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords)
+                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords,NVquery)
                     if len(newvid['keywords']) > 0:
                         newvid['vaccine']=True
                     else:
@@ -229,6 +235,7 @@ while True:
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='Other'
                     videosJ.append(newvid)
+                    newvid['data']=NVquery
                     newvids+=1
                     with open('videos.json','a') as file:#salvando a query
                         write_document_to_file(newvid,file)
@@ -268,8 +275,10 @@ while True:
         for j in queries: #adiciona os novos videos aos videos a serem monitorados
             for i in j['items']:
                 try:
+                    NVreq=youtube2.videos().list(part=part,id=i['id']['videoId'])
+                    NVquery=NVreq.execute()
                     newvid={}
-                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords)
+                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords,NVquery)
                     if len(newvid['keywords']) > 0:
                         newvid['vaccine']=True
                     else:
@@ -279,6 +288,7 @@ while True:
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='US'
                     videosJ.append(newvid)
+                    newvid['data']=NVquery
                     newvids+=1
                     with open('videos.json','a') as file:#salvando a query
                         write_document_to_file(newvid,file)
@@ -287,8 +297,10 @@ while True:
         for j in queriesBR: #adiciona os novos videos aos videos a serem monitorados
             for i in j['items']:
                 try:
+                    NVreq=youtube2.videos().list(part=part,id=i['id']['videoId'])
+                    NVquery=NVreq.execute()
                     newvid={}
-                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords)
+                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords,NVquery)
                     if len(newvid['keywords']) > 0:
                         newvid['vaccine']=True
                     else:
@@ -298,6 +310,7 @@ while True:
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='BR'
                     videosJ.append(newvid)
+                    newvid['data']=NVquery
                     newvids+=1
                     with open('videos.json','a') as file:#salvando a query
                         write_document_to_file(newvid,file)
@@ -306,8 +319,10 @@ while True:
         for j in queriesOther: #adiciona os novos videos aos videos a serem monitorados
             for i in j['items']:
                 try:
+                    NVreq=youtube2.videos().list(part=part,id=i['id']['videoId'])
+                    NVquery=NVreq.execute()
                     newvid={}
-                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords)
+                    newvid['keywords']=check_vaccine(i['id']['videoId'],covid_keywords,NVquery)
                     if len(newvid['keywords']) > 0:
                         newvid['vaccine']=True
                     else:
@@ -317,6 +332,7 @@ while True:
                     newvid['channel']=i['snippet']['channelId']
                     newvid['country']='Other'
                     videosJ.append(newvid)
+                    newvid['data']=NVquery
                     newvids+=1
                     with open('videos.json','a') as file:#salvando a query
                         write_document_to_file(newvid,file)
@@ -375,7 +391,9 @@ while True:
                 for j in Vquery['items']:#adicione os dados normalmente 
                     dic['Date']=day.strftime("%d/%m/%y")
                     dic['Video_Id']=k
-                    dic['Data']=Vquery
+                    dic['channelId']=Vquery['items'][0]['snippet']['channelId']
+                    dic['title']=Vquery['items'][0]['snippet']['title']
+                    dic['Data']=Vquery['items'][0]['statistics']
                     with open('videosData.json','a') as file:#salvando a query
                         write_document_to_file(dic,file)
     print('done ',day)   
