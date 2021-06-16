@@ -118,7 +118,7 @@ while True:
 
     # In[11]:
 
-
+'''
     US=set()
     BR=set()
     Other=set()
@@ -139,7 +139,7 @@ while True:
     BR=list(BR)
     US=list(US)
     Other=list(Other)
-
+'''
 
     # In[12]:
 
