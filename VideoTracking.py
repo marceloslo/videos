@@ -98,19 +98,19 @@ def check_vaccine(vidId,keywords,NVquery):
 part=["id","snippet","contentDetails","statistics","status"]
 while True:
     try:
-        with open('/mnt/princeton_data/videosData.json') as json_file:
+        with open('/princeton_data/videosData.json') as json_file:
             videosData=[]
             for line in json_file:
                 videosData.append(json.loads(line))
     except:
         videosData=[]
 
-    with open('/mnt/princeton_data/videos.json') as json_file:
+    with open('/princeton_data/videos.json') as json_file:
         videosJ=[]
         for line in json_file:
             videosJ.append(json.loads(line))
             
-    with open('/mnt/princeton_data/channels_metadata.json') as json_file:
+    with open('/princeton_data/channels_metadata.json') as json_file:
         channels=[]
         for line in json_file:
             channels.append(json.loads(line))
@@ -149,7 +149,7 @@ while True:
                             dic['Date']=day.strftime("%d/%m/%y")
                             dic['Video_Id']=k
                             dic['Data']='Video was removed'#marque como removido esse dia
-                            with open('/mnt/princeton_data/videosData.json','a') as file:#salvando a query
+                            with open('/princeton_data/videosData.json','a') as file:#salvando a query
                                 write_document_to_file(dic,file)
                             rm['VideoId']=k#adicione aos videos removidos
                             rm['RemovalDate']=day.strftime("%d/%m/%y")#adicione a data aos videos removidos
@@ -157,7 +157,7 @@ while True:
                                 if t['video']==k:
                                     rm['Channel']=t['channel']
                                     break
-                            with open('/mnt/princeton_data/removedVideos.json','a') as file2:#salvando o video removido
+                            with open('/princeton_data/removedVideos.json','a') as file2:#salvando o video removido
                                 write_document_to_file(rm,file2)
                         break
 
@@ -168,7 +168,7 @@ while True:
                     dic['channelId']=Vquery['items'][0]['snippet']['channelId']
                     dic['title']=Vquery['items'][0]['snippet']['title']
                     dic['Data']=Vquery['items'][0]['statistics']
-                    with open('/mnt/princeton_data/videosData.json','a') as file:#salvando a query
+                    with open('/princeton_data/videosData.json','a') as file:#salvando a query
                         write_document_to_file(dic,file)
     print('done ',day)   
     time.sleep(86400)
