@@ -122,7 +122,7 @@ while True:
         checked=False     
         k=videosJ[l]['video']
         for j in range(len(videosData)-1,-1,-1):
-            if day.strftime("%d/%m/%y") == videosData[j]['Date']:
+            if day.strftime('%Y-%m-%d') == videosData[j]['Date']:
                 if k==videosData[j]['Video_Id']:
                     checked=True
             else:
@@ -146,13 +146,13 @@ while True:
                 for i in range(len(videosData)-1,-1,-1):
                     if videosData[i]['Video_Id']==k:
                         if videosData[i]['Data']!='Video was removed':
-                            dic['Date']=day.strftime("%d/%m/%y")
+                            dic['Date']=day.strftime('%Y-%m-%d')
                             dic['Video_Id']=k
                             dic['Data']='Video was removed'#marque como removido esse dia
                             with open('/princeton_data/videosData.json','a') as file:#salvando a query
                                 write_document_to_file(dic,file)
                             rm['VideoId']=k#adicione aos videos removidos
-                            rm['RemovalDate']=day.strftime("%d/%m/%y")#adicione a data aos videos removidos
+                            rm['RemovalDate']=day.strftime('%Y-%m-%d')#adicione a data aos videos removidos
                             for t in videosJ:
                                 if t['video']==k:
                                     rm['Channel']=t['channel']
@@ -163,7 +163,7 @@ while True:
 
             else:#se lenght da query>0
                 for j in Vquery['items']:#adicione os dados normalmente 
-                    dic['Date']=day.strftime("%d/%m/%y")
+                    dic['Date']=day.strftime('%Y-%m-%d')
                     dic['Video_Id']=k
                     dic['channelId']=Vquery['items'][0]['snippet']['channelId']
                     dic['title']=Vquery['items'][0]['snippet']['title']
