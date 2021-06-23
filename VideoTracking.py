@@ -167,7 +167,7 @@ while True:
                     dic['Video_Id']=k
                     dic['channelId']=Vquery['items'][0]['snippet']['channelId']
                     dic['title']=Vquery['items'][0]['snippet']['title']
-                    dic['Data']=Vquery['items'][0]['statistics']
+                    dic.update(Vquery['items'][0]['statistics'])
                     with open('/princeton_data/videosData.json','a') as file:#salvando a query
                         write_document_to_file(dic,file)
     print('done ',day)   
