@@ -119,8 +119,11 @@ while True:
     
     print('Buscando ',len(videosJ),' videos')
     for l in range(len(videosJ)):
-        checked=False     
-        k=videosJ[l]['video_id']
+        checked=False
+        try:        
+            k=videosJ[l]['video_id']
+        except:
+            continue
         for j in range(len(videosData)-1,-1,-1):
             if day.strftime('%Y-%m-%d') == videosData[j]['Date']:
                 if k==videosData[j]['Video_Id']:
