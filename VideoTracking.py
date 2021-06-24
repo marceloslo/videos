@@ -34,66 +34,8 @@ api_key4 = 'AIzaSyBnHb4QwVnEvg4LHwWnY5ihlaxARZzxmNc'
 youtube4 = build('youtube', 'v3', developerKey=api_key4)
 api_key5 = 'AIzaSyAbZWYK9EvoiWiqLnx5Ie5fKMlZsfKhMc8'
 youtube5 = build('youtube', 'v3', developerKey=api_key5)
-covid_keywords = [
-    "covid",
-    "covid-19",
-    "coronavirus",
-    "coronav\u00edrus",
-    "vaccine",
-    "vacina",
-    "vaxx",
-    "vaccination",
-    "vacina\u00e7\u00e3o",
-    "corona",
-    "pfizer",
-    "moderna",
-    "janssen",
-    "johnson &amp; johnson",
-    "johnson & johnson",
-    "astrazeneca",
-    "biontech",
-    "coronavac",
-    "butantan",
-    "covaxin",
-    "oxford",
-    "oxford-astrazeneca"
-    "sputnik v",
-    "gamaleya",
-    "cansino",
-    "vector institute",
-    "novavax",
-    "sinopharm",
-    "sinovac",
-    "sinopharm-wuhan",
-    "bharat biotech",
-    "tratamento precoce",
-    "early treatment",
-    "pff2",
-    "n95",
-    "surgical mask",
-    "m\u00e1scara",
-    "m\u00e1scara cir\u00fargica",
-    "m\u00e1scaras cir\u00fargicas",
-    "\u00e1lcool",
-    "face mask",
-    "mask",
-    "cloroquina",
-    "ivermectina",
-    "ivermectin",
-    "hydroxychloroquine",
-    "chloroquine"
-]
+
 # In[10]:
-
-def check_vaccine(vidId,keywords,NVquery):
-    title=NVquery['items'][0]['snippet']['title'].lower()
-    description=NVquery['items'][0]['snippet']['description'].lower()
-    present_keywords=[]
-    for word in keywords:
-        if word in title or word in description:
-            present_keywords.append(word)
-    return present_keywords
-
 
 part=["id","snippet","contentDetails","statistics","status"]
 while True:
@@ -110,10 +52,6 @@ while True:
         for line in json_file:
             videosJ.append(json.loads(line))
             
-    with open('/princeton_data/source_files/metadata_channels.json') as json_file:
-        channels=[]
-        for line in json_file:
-            channels.append(json.loads(line))
     # In[12]:
     day=date.today()
     
