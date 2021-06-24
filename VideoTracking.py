@@ -87,7 +87,7 @@ while True:
                 for i in range(len(videosData)-1,-1,-1):
                     if videosData[i]['Video_Id']==k:
                         try:
-                            videosData[i]['data']
+                            videosData[i]['Data']
                         except:
                             dic['Date']=day.strftime('%Y-%m-%d')
                             dic['Video_Id']=k
@@ -103,20 +103,6 @@ while True:
                                         break
                                 except:
                                     pass
-                            with open('/princeton_data/source_files/removedVideos.json','a') as file2:#salvando o video removido
-                                write_document_to_file(rm,file2)
-                        if videosData[i]['Data']!='Video was removed':
-                            dic['Date']=day.strftime('%Y-%m-%d')
-                            dic['Video_Id']=k
-                            dic['Data']='Video was removed'#marque como removido esse dia
-                            with open('/princeton_data/source_files/daily_logging_videos.json','a') as file:#salvando a query
-                                write_document_to_file(dic,file)
-                            rm['VideoId']=k#adicione aos videos removidos
-                            rm['RemovalDate']=day.strftime('%Y-%m-%d')#adicione a data aos videos removidos
-                            for t in videosJ:
-                                if t['video']==k:
-                                    rm['Channel']=t['channel']
-                                    break
                             with open('/princeton_data/source_files/removedVideos.json','a') as file2:#salvando o video removido
                                 write_document_to_file(rm,file2)
                         break
