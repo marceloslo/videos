@@ -81,17 +81,15 @@ while True:
             else:
                 Vreq=youtube4.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
-            dic={}
+            dic={"Date":np.nan,'title':np.nan,"Video_Id":np.nan,"channelId":np.nan,'status':np.nan,"viewCount":np.nan,"viewCount":np.nan,"likeCount":np.nan,"dislikeCount":np.nan,"favoriteCount":np.nan,"commentCount": np.nan}
             rm={}
             if len(Vquery['items'])==0: #se a busca não encontrar nenhum video com o id pesquisado
                 for i in range(len(videosData)-1,-1,-1):
                     if videosData[i]['Video_Id']==k:
-                        try:
-                            videosData[i]['Data']
-                        except:
+                        if videosData[i]['status']!='Video was removed'
                             dic['Date']=day.strftime('%Y-%m-%d')
                             dic['Video_Id']=k
-                            dic['Data']='Video was removed'#marque como removido esse dia
+                            dic['status']='Video was removed'#marque como removido esse dia
                             with open('/princeton_data/source_files/daily_logging_videos.json','a') as file:#salvando a query
                                 write_document_to_file(dic,file)
                             rm['VideoId']=k#adicione aos videos removidos
