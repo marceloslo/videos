@@ -81,7 +81,7 @@ while True:
             else:
                 Vreq=youtube4.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
-            dic={"Date":np.nan,'title':np.nan,"Video_Id":np.nan,"channelId":np.nan,'status':np.nan,"viewCount":np.nan,"viewCount":np.nan,"likeCount":np.nan,"dislikeCount":np.nan,"favoriteCount":np.nan,"commentCount": np.nan}
+            dic={"Date":np.nan,'title':np.nan,"Video_Id":np.nan,"channelId":np.nan,'status':np.nan,"viewCount":np.nan,"likeCount":np.nan,"dislikeCount":np.nan,"favoriteCount":np.nan,"commentCount": np.nan}
             rm={}
             if len(Vquery['items'])==0: #se a busca não encontrar nenhum video com o id pesquisado
                 for i in range(len(videosData)-1,-1,-1):
