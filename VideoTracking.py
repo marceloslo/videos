@@ -86,7 +86,7 @@ while True:
             if len(Vquery['items'])==0: #se a busca não encontrar nenhum video com o id pesquisado
                 for i in range(len(videosData)-1,-1,-1):
                     if videosData[i]['Video_Id']==k:
-                        if videosData[i]['status']!='Video was removed'
+                        if videosData[i]['status']!='Video was removed':
                             dic['Date']=day.strftime('%Y-%m-%d')
                             dic['Video_Id']=k
                             dic['status']='Video was removed'#marque como removido esse dia
