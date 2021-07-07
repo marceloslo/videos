@@ -114,13 +114,13 @@ while True:
                         write_document_to_file(dic,file)
                     rm['VideoId']=k#adicione aos videos removidos
                     rm['RemovalDate']=day.strftime('%Y-%m-%d')#adicione a data aos videos removidos
-                        for t in videosJ:
-                            try:
-                                if t['video']==k:
-                                    rm['Channel']=t['channel']
-                                    break
-                            except:
-                                pass
+                    for t in videosJ:
+                        try:
+                            if t['video']==k:
+                                rm['Channel']=t['channel']
+                                break
+                        except:
+                            pass
                     with open('/princeton_data/source_files/removedVideos.json','a') as file2:#salvando o video removido
                         write_document_to_file(rm,file2)
             else:#se lenght da query>0
