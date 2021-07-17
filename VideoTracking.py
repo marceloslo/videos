@@ -98,7 +98,7 @@ while True:
                             rm['RemovalDate']=day.strftime('%Y-%m-%d')#adicione a data aos videos removidos
                             for t in videosJ:
                                 try:
-                                    if t['video']==k:
+                                    if t['video_id']==k:
                                         rm['Channel']=t['channel']
                                         break
                                 except:
@@ -116,7 +116,7 @@ while True:
                     rm['RemovalDate']=day.strftime('%Y-%m-%d')#adicione a data aos videos removidos
                     for t in videosJ:
                         try:
-                            if t['video']==k:
+                            if t['video_id']==k:
                                 rm['Channel']=t['channel']
                                 break
                         except:
