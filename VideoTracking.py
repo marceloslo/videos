@@ -99,7 +99,7 @@ while True:
                             for t in videosJ:
                                 try:
                                     if t['video_id']==k:
-                                        rm['Channel']=t['channel']
+                                        rm['Channel']=t['channel_id']
                                         break
                                 except:
                                     pass
@@ -117,7 +117,7 @@ while True:
                     for t in videosJ:
                         try:
                             if t['video_id']==k:
-                                rm['Channel']=t['channel']
+                                rm['Channel']=t['channel_id']
                                 break
                         except:
                             pass
