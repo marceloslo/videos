@@ -24,15 +24,15 @@ def write_document_to_file(document, file):
 # In[9]:
 
 
-api_key = 'AIzaSyBvMnwW7NClOkJici-WJAfVFuPusFqlRxw'
+api_key = 'AIzaSyB7EHy2ZKpfPTY56yRVuu7a8lChfB-IVjw'
 youtube = build('youtube', 'v3', developerKey=api_key)
-api_key2 = 'AIzaSyBYqe5QINxeNg0tf5BEzh4ngzwBiDloDlI'
+api_key2 = 'AIzaSyBD-Epo0MEZmxJu-ZKhDSwWSBmhNSyPjYU'
 youtube2 = build('youtube', 'v3', developerKey=api_key2)
-api_key3 = 'AIzaSyBD-Epo0MEZmxJu-ZKhDSwWSBmhNSyPjYU'
+api_key3 = 'AIzaSyBYqe5QINxeNg0tf5BEzh4ngzwBiDloDlI'
 youtube3 = build('youtube', 'v3', developerKey=api_key3)
-api_key4 = 'AIzaSyBnHb4QwVnEvg4LHwWnY5ihlaxARZzxmNc'
+api_key4 = 'AIzaSyAbZWYK9EvoiWiqLnx5Ie5fKMlZsfKhMc8'
 youtube4 = build('youtube', 'v3', developerKey=api_key4)
-api_key5 = 'AIzaSyAbZWYK9EvoiWiqLnx5Ie5fKMlZsfKhMc8'
+api_key5 = 'AIzaSyBnHb4QwVnEvg4LHwWnY5ihlaxARZzxmNc'
 youtube5 = build('youtube', 'v3', developerKey=api_key5)
 
 # In[10]:
@@ -70,16 +70,16 @@ while True:
                 break
         if not checked:
             if l <9000:
-                Vreq=youtube3.videos().list(part=part,id=k)
+                Vreq=youtube.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
             elif l<18000:
-                Vreq=youtube4.videos().list(part=part,id=k)
-                Vquery=Vreq.execute()
-            elif l <27000:
                 Vreq=youtube2.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
+            elif l <27000:
+                Vreq=youtube3.videos().list(part=part,id=k)
+                Vquery=Vreq.execute()
             else:
-                Vreq=youtube.videos().list(part=part,id=k)
+                Vreq=youtube4.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
             dic={"Date":np.nan,'title':np.nan,"Video_Id":np.nan,"channelId":np.nan,'status':np.nan,"viewCount":np.nan,"likeCount":np.nan,"dislikeCount":np.nan,"favoriteCount":np.nan,"commentCount": np.nan}
             rm={}
