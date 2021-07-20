@@ -70,16 +70,16 @@ while True:
                 break
         if not checked:
             if l <9000:
-                Vreq=youtube2.videos().list(part=part,id=k)
-                Vquery=Vreq.execute()
-            elif l<18000:
-                Vreq=youtube.videos().list(part=part,id=k)
-                Vquery=Vreq.execute()
-            elif l <27000:
                 Vreq=youtube3.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
-            else:
+            elif l<18000:
                 Vreq=youtube4.videos().list(part=part,id=k)
+                Vquery=Vreq.execute()
+            elif l <27000:
+                Vreq=youtube2.videos().list(part=part,id=k)
+                Vquery=Vreq.execute()
+            else:
+                Vreq=youtube.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
             dic={"Date":np.nan,'title':np.nan,"Video_Id":np.nan,"channelId":np.nan,'status':np.nan,"viewCount":np.nan,"likeCount":np.nan,"dislikeCount":np.nan,"favoriteCount":np.nan,"commentCount": np.nan}
             rm={}
