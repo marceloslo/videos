@@ -69,13 +69,13 @@ while True:
             else:
                 break
         if not checked:
-            if l <9000:
+            if l <8000:
                 Vreq=youtube.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
-            elif l<18000:
+            elif l<16000:
                 Vreq=youtube2.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
-            elif l <27000:
+            elif l <24000:
                 Vreq=youtube3.videos().list(part=part,id=k)
                 Vquery=Vreq.execute()
             else:
