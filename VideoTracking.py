@@ -39,6 +39,12 @@ youtube5 = build('youtube', 'v3', developerKey=api_key5)
 
 part=["id","snippet","contentDetails","statistics","status"]
 while True:
+
+    with open('/princeton_data/source_files/metadata_videos.json') as json_file:
+        videosJ=[]
+        for line in json_file:
+            videosJ.append(json.loads(line))
+    
     try:
         with open('/princeton_data/source_files/daily_logging_videos.json') as json_file:
             videosData=[]
@@ -46,12 +52,7 @@ while True:
                 videosData.append(json.loads(line))
     except:
         videosData=[]
-
-    with open('/princeton_data/source_files/metadata_videos.json') as json_file:
-        videosJ=[]
-        for line in json_file:
-            videosJ.append(json.loads(line))
-    
+    videosData=videosData[-2*(len(videosJ)):]    
     with open('/princeton_data/source_files/removedVideos.json') as json_file:
         allrmvid=[]
         for line in json_file:
