@@ -24,7 +24,7 @@ def write_document_to_file(document, file):
 # In[9]:
 
 
-api_key = 'AIzaSyB7EHy2ZKpfPTY56yRVuu7a8lChfB-IVjw'
+api_key = 'AIzaSyBnHb4QwVnEvg4LHwWnY5ihlaxARZzxmNc'
 youtube = build('youtube', 'v3', developerKey=api_key)
 api_key2 = 'AIzaSyBD-Epo0MEZmxJu-ZKhDSwWSBmhNSyPjYU'
 youtube2 = build('youtube', 'v3', developerKey=api_key2)
@@ -32,7 +32,7 @@ api_key3 = 'AIzaSyBYqe5QINxeNg0tf5BEzh4ngzwBiDloDlI'
 youtube3 = build('youtube', 'v3', developerKey=api_key3)
 api_key4 = 'AIzaSyAbZWYK9EvoiWiqLnx5Ie5fKMlZsfKhMc8'
 youtube4 = build('youtube', 'v3', developerKey=api_key4)
-api_key5 = 'AIzaSyBnHb4QwVnEvg4LHwWnY5ihlaxARZzxmNc'
+api_key5 = 'AIzaSyB7EHy2ZKpfPTY56yRVuu7a8lChfB-IVjw'
 youtube5 = build('youtube', 'v3', developerKey=api_key5)
 
 # In[10]:
