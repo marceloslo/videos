@@ -51,7 +51,11 @@ while True:
         videosJ=[]
         for line in json_file:
             videosJ.append(json.loads(line))
-            
+    
+    with open('/princeton_data/source_files/removedVideos.json') as json_file:
+        allrmvid=[]
+        for line in json_file:
+            allrmvid.append(json.loads(line))
     # In[12]:
     day=date.today()
     
@@ -85,33 +89,10 @@ while True:
             rm={}
             if len(Vquery['items'])==0: #se a busca não encontrar nenhum video com o id pesquisado
                 exists=False
-                for i in range(len(videosData)-1,-1,-1):
-                    if videosData[i]['Video_Id']==k:
+                for i in allrmvid:
+                    if i['VideoId']==k:
                         exists=True
-                        if videosData[i]['status']!='Video was removed':
-                            dic['Date']=day.strftime('%Y-%m-%d')
-                            dic['Video_Id']=k
-                            dic['status']='Video was removed'#marque como removido esse dia
-                            with open('/princeton_data/source_files/daily_logging_videos.json','a') as file:#salvando a query
-                                write_document_to_file(dic,file)
-                            rm['VideoId']=k#adicione aos videos removidos
-                            rm['RemovalDate']=day.strftime('%Y-%m-%d')#adicione a data aos videos removidos
-                            for t in videosJ:
-                                try:
-                                    if t['video_id']==k:
-                                        rm['Channel']=t['channel_id']
-                                        break
-                                except:
-                                    pass
-                            with open('/princeton_data/source_files/removedVideos.json','a') as file2:#salvando o video removido
-                                write_document_to_file(rm,file2)
-                        break
                 if not exists:
-                    dic['Date']=day.strftime('%Y-%m-%d')
-                    dic['Video_Id']=k
-                    dic['status']='Video was removed'#marque como removido esse dia
-                    with open('/princeton_data/source_files/daily_logging_videos.json','a') as file:#salvando a query
-                        write_document_to_file(dic,file)
                     rm['VideoId']=k#adicione aos videos removidos
                     rm['RemovalDate']=day.strftime('%Y-%m-%d')#adicione a data aos videos removidos
                     for t in videosJ:
