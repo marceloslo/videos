@@ -90,8 +90,9 @@ while True:
             rm={}
             if len(Vquery['items'])==0: #se a busca não encontrar nenhum video com o id pesquisado
                 exists=False
-                for i in allrmvid:
-                    if i['VideoId']==k:
+                for j in range(len(allrmvid)-1,-1,-1):
+                    i=allrmvid[j]
+                    if i['VideoId']==k and i['back_online']==False:
                         exists=True
                 if not exists:
                     rm['VideoId']=k#adicione aos videos removidos
@@ -103,15 +104,25 @@ while True:
                                 break
                         except:
                             pass
+                    rm['back_online']=False
                     with open('/princeton_data/source_files/removedVideos.json','a') as file2:#salvando o video removido
                         write_document_to_file(rm,file2)
             else:#se lenght da query>0
                 for j in Vquery['items']:#adicione os dados normalmente 
+                    change=False
                     dic['Date']=day.strftime('%Y-%m-%d')
                     dic['Video_Id']=k
                     dic['channelId']=Vquery['items'][0]['snippet']['channelId']
                     dic['title']=Vquery['items'][0]['snippet']['title']
                     dic.update(Vquery['items'][0]['statistics'])
+                    for i in range(len(allrmvid)):#se o video era anteriormente removido
+                        if allrmvid[i]['VideoId']==k:
+                            allrmvid['back_online']=True #ele volta a estar online
+                            change=True
+                    if change:
+                        with open('/princeton_data/source_files/removedVideos.json','w') as file: #salvando as mudanças nos removidos
+                            for document in allrmvid:
+                                write_document_to_file(document,file)
                     with open('/princeton_data/source_files/daily_logging_videos.json','a') as file:#salvando a query
                         write_document_to_file(dic,file)
     print('done ',day)   
