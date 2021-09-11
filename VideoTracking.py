@@ -39,7 +39,7 @@ youtube5 = build('youtube', 'v3', developerKey=api_key5)
 
 part=["id","snippet","contentDetails","statistics","status"]
 while True:
-
+    change=False
     with open('/princeton_data/source_files/metadata_videos.json') as json_file:
         videosJ=[]
         for line in json_file:
@@ -109,7 +109,6 @@ while True:
                         write_document_to_file(rm,file2)
             else:#se lenght da query>0
                 for j in Vquery['items']:#adicione os dados normalmente 
-                    change=False
                     dic['Date']=day.strftime('%Y-%m-%d')
                     dic['Video_Id']=k
                     dic['channelId']=Vquery['items'][0]['snippet']['channelId']
@@ -119,11 +118,12 @@ while True:
                         if allrmvid[i]['VideoId']==k:
                             allrmvid[i]['back_online']=True #ele volta a estar online
                             change=True
-                    if change:
-                        with open('/princeton_data/source_files/removedVideos.json','w') as file: #salvando as mudanças nos removidos
-                            for document in allrmvid:
-                                write_document_to_file(document,file)
+
                     with open('/princeton_data/source_files/daily_logging_videos.json','a') as file:#salvando a query
                         write_document_to_file(dic,file)
+    if change:
+        with open('/princeton_data/source_files/removedVideos.json','w') as file: #salvando as mudanças nos removidos
+            for document in allrmvid:
+                write_document_to_file(document,file)
     print('done ',day)   
     time.sleep(86400)
