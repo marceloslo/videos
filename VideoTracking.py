@@ -117,7 +117,7 @@ while True:
                     dic.update(Vquery['items'][0]['statistics'])
                     for i in range(len(allrmvid)):#se o video era anteriormente removido
                         if allrmvid[i]['VideoId']==k:
-                            allrmvid['back_online']=True #ele volta a estar online
+                            allrmvid[i]['back_online']=True #ele volta a estar online
                             change=True
                     if change:
                         with open('/princeton_data/source_files/removedVideos.json','w') as file: #salvando as mudanças nos removidos
