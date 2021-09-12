@@ -105,8 +105,10 @@ while True:
                         except:
                             pass
                     rm['back_online']=False
-                    with open('/princeton_data/source_files/removedVideos.json','a') as file2:#salvando o video removido
-                        write_document_to_file(rm,file2)
+                    allrmvid.append(rm)
+                    change=True
+                    #with open('/princeton_data/source_files/removedVideos.json','a') as file2:#salvando o video removido
+                    #   write_document_to_file(rm,file2)
             else:#se lenght da query>0
                 for j in Vquery['items']:#adicione os dados normalmente 
                     dic['Date']=day.strftime('%Y-%m-%d')
