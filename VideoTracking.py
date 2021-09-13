@@ -105,6 +105,7 @@ while True:
                         except:
                             pass
                     rm['back_online']=False
+                    print(rm)
                     allrmvid.append(rm)
                     change=True
                     #with open('/princeton_data/source_files/removedVideos.json','a') as file2:#salvando o video removido
