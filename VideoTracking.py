@@ -96,16 +96,15 @@ while True:
                         exists=True
                 if not exists:
                     rm['VideoId']=k#adicione aos videos removidos
-                    rm['RemovalDate']=day.strftime('%Y-%m-%d')#adicione a data aos videos removidos
-                    for t in videosJ:
+                    for t in videosJ:#encontra canal do video
                         try:
                             if t['video_id']==k:
                                 rm['Channel']=t['channel_id']
                                 break
                         except:
                             pass
-                    rm['back_online']=False
-                    print(rm)
+                    rm['RemovalDate']=day.strftime('%Y-%m-%d')#adicione a data aos videos removidos
+                    rm['back_online']=False #marca que não está online
                     allrmvid.append(rm)
                     change=True
                     #with open('/princeton_data/source_files/removedVideos.json','a') as file2:#salvando o video removido
